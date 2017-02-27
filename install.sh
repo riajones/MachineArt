@@ -1,3 +1,5 @@
+echo installing opencv
+
 sudo apt-get install python-pip python-dev build-essential 
 sudo pip install --upgrade pip 
 sudo pip install --upgrade virtualenv 
@@ -18,3 +20,25 @@ sudo make install
 
 cd ..
 python3.5 testCV2.py
+
+
+echo Installing mongodb
+
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo apt install mongodb-clients
+cd /lib/systemd/system/
+sudo subl mongod.service
+
+systemctl daemon-reload
+systemctl start mongod
+systemctl enable mongod
+
+sudo apt-get install lsof
+sudo lsof -i :27017
+read -p "Press enter to continue"
+
+
+
